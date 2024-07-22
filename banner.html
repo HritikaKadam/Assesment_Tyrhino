@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limited Time Offer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .banner-desktop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffa500;
+            padding: 10px 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .banner-desktop .timer {
+            font-size: 1.2em;
+            margin-left: 10px;
+        }
+
+        .banner-desktop .offer {
+            display: flex;
+            align-items: center;
+        }
+
+        .banner-desktop .offer img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .banner-mobile {
+            display: none;
+            text-align: center;
+            background-color: #ffeb3b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .banner-mobile .timer {
+            font-size: 1.5em;
+            color: #d9534f;
+        }
+
+        @media (max-width: 600px) {
+            .banner-desktop {
+                display: none;
+            }
+
+            .banner-mobile {
+                display: block;
+            }
+
+            .banner-mobile .timer {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner-desktop">
+        <div class="offer">
+            <img src="https://img.icons8.com/emoji/48/000000/hourglass-not-done.png" alt="Timer">
+            <span>LIMITED TIME OFFER</span>
+        </div>
+        <div class="timer-container">
+            Ends in: <span id="timer-desktop" class="timer">01:30:15</span>
+        </div>
+        <div>
+            GET 10% OFF Use Code: <strong>EXAMSTART</strong>
+        </div>
+    </div>
+
+    <div class="banner-mobile">
+        <h1>Limited Time Offer</h1>
+        <p>Ends in: <span id="timer-mobile" class="timer">01:30:15</span></p>
+        <p><strong>Get 10% Off</strong> Use Code: <strong>EXAMSTART</strong></p>
+    </div>
+
+    <script>
+        function startTimer(duration, display) {
+            var timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var duration = 1 * 3600 + 30 * 60 + 15; // 1 hour 30 minutes 15 seconds
+            var displayDesktop = document.querySelector('#timer-desktop');
+            var displayMobile = document.querySelector('#timer-mobile');
+            startTimer(duration, displayDesktop);
+            startTimer(duration, displayMobile);
+        };
+    </script>
+</body>
+
+</html>
